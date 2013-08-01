@@ -1,0 +1,164 @@
+// browser support (specifically gradients for opera, ie9)
+$experimental-support-for-svg: true
+
+=ios-scrollbar
+  ::-webkit-scrollbar
+    width: 8px
+  ::-webkit-scrollbar-button
+    display: none
+  ::-webkit-scrollbar-track-piece
+    border-radius: 8px
+    margin: 2px 0
+  ::-webkit-scrollbar-thumb:vertical
+    background: #999
+    border-radius: 8px
+
+=text-ellipsis
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap
+
+=float-cell($dir)
+  display: inline-block
+  float: #{$dir}
+
+=triangle($dimensions, $color, $direction)
+  width: 0
+  height: 0
+  border-color: transparent
+  border-style: solid
+  border-width: #{$dimensions}
+  border-#{$direction}-color: #{$color}
+  position: absolute
+
+=cool-remove-ex($crW, $crH, $crT, $crR, $crBrad, $crColor, $crFont)
+  width: #{$crW}px
+  height: #{$crH}px
+  right: #{$crR}px
+  top: #{$crT}px
+  background-color: rgba(255,255,255, 0.8)
+  border-radius: #{$crBrad}px
+  box-shadow: 0 0 1px 1px rgba(142,142,142, 0.4)
+  color: rgba(0,0,0, 0.15)
+  cursor: pointer
+  display: block
+  position: absolute
+  z-index: 10
+  +transition(color 0.1s ease-in-out 0)
+  &:hover
+    background-color: rgba(182,31,82, 0.9)
+  &:after
+    width: #{$crW}px
+    height: #{$crH}px
+    top: 50%
+    right: 0
+    color: #{$crColor}
+    content: "\0078" !important
+    display: block
+    font: #{$crFont}
+    margin-top: -5px
+    position: absolute
+    text-align: center
+    text-shadow: none
+    vertical-align: top
+  &:hover:after
+    color: #fff
+
+=input-placeholder($color)
+  &.placeholder
+    color: $color
+    font-style: italic
+    padding-top: 2px
+  &:-ms-input-placeholder
+    color: $color
+    font-style: italic
+    padding-top: 2px
+  &:-moz-placeholder
+    color: $color
+    font-style: italic
+    padding-top: 2px
+  &::-webkit-input-placeholder
+    color: $color
+    font-style: italic
+    padding-top: 2px
+
+=textarea-placeholder($color)
+  &.placeholder
+    color: $color
+    font-style: italic
+  &:-ms-input-placeholder
+    color: $color
+    font-style: italic
+  &:-moz-placeholder
+    color: $color
+    font-style: italic
+  &::-webkit-input-placeholder
+    color: $color
+    font-style: italic
+
+=double-triangles($hyp, $widthOut, $widthIn, $triColor)
+  width: 0
+  height: 0
+  background-image: none
+  border-color: transparent
+  border-style: solid
+  border-width: $widthOut
+  border-#{$hyp}-color: $triColor
+  &:after
+    width: 0
+    height: 0
+    border-color: transparent
+    border-style: solid
+    border-width: $widthIn
+    border-#{$hyp}-color: rgba(85,85,85, 0.9)
+    content: ''
+    display: block
+    position: absolute
+
+=loading-stripes($w, $h, $y, $msgOffset, $msgSize, $msg)
+  width: #{$w}px
+  height: #{$h}px !important
+  top: #{$y}px
+  left: 50%
+  background-size: 100% !important
+  box-shadow: 0 0 3px 1px rgba(0,0,0, 0.05)
+  cursor: default
+  display: block
+  margin: 0 0 0 -#{$w / 2}px !important
+  opacity: 1
+  position: absolute
+  text-align: left
+  z-index: 3
+  +background-image(linear-gradient(top, rgba(218,218,218, 0.5), rgba(218,218,218, 0.8)))
+  &:hover
+    box-shadow: 0 0 3px 1px rgba(0,0,0, 0.05)
+  &:before
+    width: #{$w}px
+    height: #{$h}px
+    top: #{$msgOffset}px
+    left: 0
+    color: #666
+    content: '#{$msg}'
+    font: #{$msgSize}em/1em ProxThin
+    position: absolute
+    text-align: center
+  > span
+    width: 100%
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    -moz-background-size: 50px 50px
+    background-size: 50px 50px
+    content: ""
+    position: absolute
+    z-index: 1
+    background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.25, rgba(255,255,255, 0.5)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255,255,255, 0.5)), color-stop(0.75, rgba(255,255,255, 0.5)), color-stop(0.75, transparent), to(transparent))
+    background-image: -webkit-linear-gradient(-45deg, rgba(255,255,255, 0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255, 0.5) 50%, rgba(255,255,255, 0.5) 75%, transparent 75%, transparent)
+    background-image: -ms-gradient(linear, 0 0, 100% 100%, color-stop(0.25, rgba(255,255,255, 0.5)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255,255,255, 0.5)), color-stop(0.75, rgba(255,255,255, 0.5)), color-stop(0.75, transparent), to(transparent))
+    background-image: -ms-linear-gradient(-45deg, rgba(255,255,255, 0.5) 25%, transparent 25%, transparent 50%, rgba(255,255,255, 0.5) 50%, rgba(255,255,255, 0.5) 75%, transparent 75%, transparent)
+    -moz-animation: 3s linear 0s normal none infinite move
+    -webkit-animation: move 2.5s linear infinite
+    animation: 3s linear 0s normal none infinite move
+  > span:after
+    display: none
